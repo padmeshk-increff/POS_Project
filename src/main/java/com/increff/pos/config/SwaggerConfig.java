@@ -24,8 +24,6 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .build();
     }
 
-    // THIS IS THE FIX
-    // Add a view controller to forward the base URL to the Swagger UI's index.html
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/swagger-ui/", "/swagger-ui/index.html");
