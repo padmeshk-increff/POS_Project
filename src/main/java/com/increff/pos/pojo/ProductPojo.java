@@ -1,18 +1,23 @@
 package com.increff.pos.pojo;
 
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.ZonedDateTime;
 
+@Data
 @Entity
 @Table(name = "products")
 public class ProductPojo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,60 +29,28 @@ public class ProductPojo {
     private String name;
 
     @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
     private Double mrp;
 
-    @Column(name = "image_url")
+    @Column(nullable = false)
+    private Double costPrice;
+
     private String imageUrl;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "client_id", nullable = false)
-    private ClientPojo client;
+    @Column( nullable = false)
+    private Integer clientId;
 
-    public Integer getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ProductStatus status;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @CreationTimestamp
+    @Column(nullable = false,updatable = false)
+    private ZonedDateTime createdAt;
 
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getMrp() {
-        return mrp;
-    }
-
-    public void setMrp(Double mrp) {
-        this.mrp = mrp;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public ClientPojo getClient() {
-        return client;
-    }
-
-    public void setClient(ClientPojo client) {
-        this.client = client;
-    }
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private ZonedDateTime updatedAt;
 }
