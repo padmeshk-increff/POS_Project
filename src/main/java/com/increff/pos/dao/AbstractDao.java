@@ -46,7 +46,5 @@ public class AbstractDao {
     protected <T> T getFirstRowFromQuery(TypedQuery<T> query){
         return query.getResultList().stream().findFirst().orElse(null);
     }
-
-
 }
 
