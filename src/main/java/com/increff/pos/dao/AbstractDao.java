@@ -5,44 +5,54 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 
 //Generic Functions for All Dao Classes
 
 @Repository
-public class AbstractDao {
+public abstract class  AbstractDao<T> {
+
+    private final Class<T> clazz;
+
+    @SuppressWarnings("unchecked")
+    public AbstractDao() {
+        this.clazz = (Class<T>) ((ParameterizedType) getClass()
+                .getGenericSuperclass())
+                .getActualTypeArguments()[0];
+    }
 
     @PersistenceContext
     private EntityManager em;
 
-    protected <T> void insert(T pojo){
+    public void insert(T pojo){
         em.persist(pojo);
     }
 
-    protected <T> T selectById(Class<T> clazz,int id){
+    public T selectById(int id){
         return em.find(clazz,id);
     }
 
-    protected <T> List<T> selectAll(Class<T> clazz){
+    public List<T> selectAll(){
         String selectQuery = "select p from " + clazz.getName()+" p";
         TypedQuery<T> query = em.createQuery(selectQuery,clazz);
         return query.getResultList();
     }
-    protected <T> void deleteById(Class<T> clazz, int id){
-        T obj = selectById(clazz,id);
+    public void deleteById(int id){
+        T obj = selectById(id);
         em.remove(obj);
     }
 
-    protected <T> void update(T obj){
+    public void update(T obj){
         em.merge(obj);
     }
 
-    protected <T> TypedQuery<T> getQuery(String query,Class<T> clazz){
+    protected TypedQuery<T> getQuery(String query){
         return em.createQuery(query,clazz);
     }
 
-    protected <T> T getFirstRowFromQuery(TypedQuery<T> query){
+    protected T getFirstRowFromQuery(TypedQuery<T> query){
         return query.getResultList().stream().findFirst().orElse(null);
     }
 }

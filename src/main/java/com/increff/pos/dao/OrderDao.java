@@ -1,19 +1,9 @@
 package com.increff.pos.dao;
 
+import com.increff.pos.pojo.Order;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDao extends AbstractDao {
-    /**
-     * Available protected methods:
-     *
-     *   insert(Object pojo)                          : void
-     *   delete(Class<?> clazz, int id)               : void
-     *   <T> T selectById(Class<T> clazz, int id)     : T
-     *   <T> List<T> selectAll(Class<T> clazz)        : List<T>
-     *   update(Object pojo)                          : void
-     *   <T> TypedQuery<T> getQuery(String jpql, Class<T> clazz) : TypedQuery<T>
-     *   <T> T getSingle(TypedQuery<T> query)         : T
-     */
+public class OrderDao extends AbstractDao<Order> {
 
 }

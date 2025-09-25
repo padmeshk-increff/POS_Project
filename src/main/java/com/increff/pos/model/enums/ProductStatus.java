@@ -1,4 +1,4 @@
-package com.increff.pos.pojo;
+package com.increff.pos.model.enums;
 
 public enum ProductStatus {
     ACTIVE,

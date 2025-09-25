@@ -1,4 +1,4 @@
-package com.increff.pos.service.exception;
+package com.increff.pos.commons.exception;
 
 public class ApiException extends Exception {
     public ApiException(String message) {

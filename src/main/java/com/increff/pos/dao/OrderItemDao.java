@@ -1,28 +1,18 @@
 package com.increff.pos.dao;
 
-import com.increff.pos.pojo.OrderItemPojo;
-import java.util.List;
-import javax.persistence.TypedQuery;
+import com.increff.pos.pojo.OrderItem;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
+import java.util.List;
+
 @Repository
-public class OrderItemDao extends AbstractDao {
-    /**
-     * Available protected methods:
-     *
-     *   insert(Object pojo)                          : void
-     *   deleteById(Class<?> clazz, int id)               : void
-     *   <T> T selectById(Class<T> clazz, int id)     : T
-     *   <T> List<T> selectAll(Class<T> clazz)        : List<T>
-     *   update(Object pojo)                          : void
-     *   <T> TypedQuery<T> getQuery(String jpql, Class<T> clazz) : TypedQuery<T>
-     *   <T> T getFirstRowFromQuery(TypedQuery<T> query)         : T
-     */
+public class OrderItemDao extends AbstractDao<OrderItem> {
 
-    private static final String SELECT_BY_ORDER_ID = "select p from OrderItemPojo p where p.order.id = :orderId";
+    private static final String SELECT_BY_ORDER_ID = "select p from OrderItem p where orderId = :orderId";
 
-    public List<OrderItemPojo> selectByOrderId(int orderId) {
-        TypedQuery<OrderItemPojo> query = getQuery(SELECT_BY_ORDER_ID, OrderItemPojo.class);
+    public List<OrderItem> selectByOrderId(int orderId) {
+        TypedQuery<OrderItem> query = getQuery(SELECT_BY_ORDER_ID);
         query.setParameter("orderId", orderId);
         return query.getResultList();
     }

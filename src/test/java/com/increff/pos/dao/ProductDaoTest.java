@@ -1,15 +1,16 @@
 package com.increff.pos.dao;
 
-import com.increff.pos.pojo.ClientPojo;
-import com.increff.pos.pojo.ProductPojo;
-import com.increff.pos.pojo.ProductStatus;
+import com.increff.pos.pojo.Client;
+import com.increff.pos.pojo.Product;
+import com.increff.pos.model.enums.ProductStatus;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.ZonedDateTime;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 @Transactional
 public class ProductDaoTest extends AbstractDaoTest {
@@ -17,51 +18,97 @@ public class ProductDaoTest extends AbstractDaoTest {
     @Autowired private ProductDao productDao;
     @Autowired private ClientDao clientDao;
 
-    @Test
-    public void testInsertAndSelect() {
-        // Arrange
-        ClientPojo client = new ClientPojo();
+    private Integer testClientId;
+
+    // Use @Before to set up common data for all tests
+    @Before
+    public void setup() {
+        Client client = new Client();
         client.setClientName("test-client");
         clientDao.insert(client);
+        this.testClientId = client.getId();
+    }
 
-        ProductPojo product = new ProductPojo();
-        product.setBarcode("testbarcode123");
-        product.setClientId(client.getId());
-        product.setName("test-product");
-        product.setMrp(99.99);
-        product.setCostPrice(80.00);
-        product.setCategory("test-category");
-        product.setStatus(ProductStatus.ACTIVE);
+    @Test
+    public void testInsertAndSelectById() {
+        // Arrange
+        Product product = createTestProduct("barcode1");
 
         // Act
         productDao.insert(product);
-        ProductPojo retrievedProduct = productDao.selectById(ProductPojo.class, product.getId());
+        Product retrieved = productDao.selectById(product.getId());
 
         // Assert
-        assertNotNull(retrievedProduct);
-        assertEquals("testbarcode123", retrievedProduct.getBarcode());
-        assertEquals(client.getId(), retrievedProduct.getClientId());
-
-        //Act
-        ProductPojo expectedProduct = testUpdate(product.getId());
-
-        //Assert
-        retrievedProduct = productDao.selectById(ProductPojo.class,product.getId());
-        assertNotNull(retrievedProduct);
-        assertEquals(expectedProduct,retrievedProduct);
-
+        assertNotNull(retrieved);
+        assertEquals("barcode1", retrieved.getBarcode());
     }
 
-    public ProductPojo testUpdate(int id){
+    @Test
+    public void testSelectAll() {
         // Arrange
+        productDao.insert(createTestProduct("barcode1"));
+        productDao.insert(createTestProduct("barcode2"));
 
-        ProductPojo product = productDao.selectById(ProductPojo.class,id);
-        product.setMrp(9999.00);
+        // Act
+        List<Product> productList = productDao.selectAll();
 
-        productDao.update(product);
+        // Assert
+        assertEquals(2, productList.size());
+    }
 
-        assertEquals(product,productDao.selectById(ProductPojo.class,id));
+    @Test
+    public void testUpdate() {
+        // Arrange
+        Product product = createTestProduct("barcode1");
+        productDao.insert(product);
 
-        return product;
+        // Act
+        Product existing = productDao.selectById(product.getId());
+        existing.setMrp(150.75);
+        productDao.update(existing);
+
+        // Assert
+        Product updated = productDao.selectById(product.getId());
+        assertEquals(Double.valueOf(150.75), updated.getMrp());
+    }
+
+    @Test
+    public void testDeleteById() {
+        // Arrange
+        Product product = createTestProduct("barcode1");
+        productDao.insert(product);
+        Integer id = product.getId();
+
+        // Act
+        productDao.deleteById(id);
+
+        // Assert
+        assertNull(productDao.selectById(id));
+    }
+
+    @Test
+    public void testSelectByBarcode() {
+        // Arrange
+        productDao.insert(createTestProduct("unique-barcode"));
+
+        // Act
+        Product retrieved = productDao.selectByBarcode("unique-barcode");
+
+        // Assert
+        assertNotNull(retrieved);
+        assertEquals("unique-barcode", retrieved.getBarcode());
+    }
+
+    // Helper method to create a product with default values
+    private Product createTestProduct(String barcode) {
+        Product p = new Product();
+        p.setBarcode(barcode);
+        p.setClientId(this.testClientId);
+        p.setName("test-product");
+        p.setMrp(99.99);
+        p.setCostPrice(80.00);
+        p.setCategory("test-category");
+        p.setStatus(ProductStatus.ACTIVE);
+        return p;
     }
 }

@@ -1,13 +1,15 @@
 package com.increff.pos.pojo;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-@Table(name = "inventory")
-public class InventoryPojo {
+@Getter
+@Setter
+public class Inventory extends BaseEntity{
 
     @Id
     private Integer productId;
