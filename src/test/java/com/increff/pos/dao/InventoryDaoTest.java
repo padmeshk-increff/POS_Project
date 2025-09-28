@@ -106,7 +106,7 @@ public class InventoryDaoTest extends AbstractDaoTest {
         return p;
     }
 
-    private Inventory createTestInventory(Integer productId, int quantity) {
+    private Inventory createTestInventory(Integer productId, Integer quantity) {
         Inventory inv = new Inventory();
         inv.setProductId(productId);
         inv.setQuantity(quantity);

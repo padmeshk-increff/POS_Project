@@ -18,11 +18,4 @@ public class Client extends BaseEntity {
     @Column(nullable = false)
     private String clientName;
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", clientName='" + clientName + '\'' +
-                '}';
-    }
 }

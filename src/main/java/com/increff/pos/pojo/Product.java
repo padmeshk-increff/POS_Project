@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"barcode"}))
 public class Product extends BaseEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -38,4 +39,5 @@ public class Product extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ProductStatus status;
+
 }

@@ -1,6 +1,5 @@
 package com.increff.pos.config;
 
-import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

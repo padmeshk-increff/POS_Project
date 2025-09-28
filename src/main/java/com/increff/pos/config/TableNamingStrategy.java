@@ -1,6 +1,6 @@
 package com.increff.pos.config;
 
-import com.increff.pos.util.CamelToSnakeCase;
+import com.increff.pos.utils.CamelToSnakeCase;
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;

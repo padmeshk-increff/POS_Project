@@ -5,7 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClientData {
+public class ClientData extends BaseData{
+
     private Integer clientId;
     private String clientName;
+
 }

@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Import;
 @Import(DbConfig.class)
 @ComponentScan("com.increff.pos.dao")
 public class TestDbConfig {
-    // This class can be empty
+
 }

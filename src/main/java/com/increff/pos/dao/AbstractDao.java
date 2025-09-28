@@ -30,7 +30,7 @@ public abstract class  AbstractDao<T> {
         em.persist(pojo);
     }
 
-    public T selectById(int id){
+    public T selectById(Integer id){
         return em.find(clazz,id);
     }
 
@@ -39,7 +39,8 @@ public abstract class  AbstractDao<T> {
         TypedQuery<T> query = em.createQuery(selectQuery,clazz);
         return query.getResultList();
     }
-    public void deleteById(int id){
+
+    public void deleteById(Integer id){
         T obj = selectById(id);
         em.remove(obj);
     }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
 
-
 @Repository
 public class ClientDao extends AbstractDao<Client>{
 

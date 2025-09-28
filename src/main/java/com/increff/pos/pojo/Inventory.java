@@ -1,6 +1,5 @@
 package com.increff.pos.pojo;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

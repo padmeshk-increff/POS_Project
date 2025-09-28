@@ -1,6 +1,5 @@
 package com.increff.pos.pojo;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +11,7 @@ import javax.persistence.Version;
 import java.time.ZonedDateTime;
 
 @Getter
+@Setter
 @MappedSuperclass
 public abstract class BaseEntity {
 
@@ -26,4 +26,5 @@ public abstract class BaseEntity {
     @Version
     @Column(nullable = false)
     protected Integer version;
+
 }

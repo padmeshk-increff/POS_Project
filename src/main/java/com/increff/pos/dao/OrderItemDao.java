@@ -11,7 +11,7 @@ public class OrderItemDao extends AbstractDao<OrderItem> {
 
     private static final String SELECT_BY_ORDER_ID = "select p from OrderItem p where orderId = :orderId";
 
-    public List<OrderItem> selectByOrderId(int orderId) {
+    public List<OrderItem> selectByOrderId(Integer orderId) {
         TypedQuery<OrderItem> query = getQuery(SELECT_BY_ORDER_ID);
         query.setParameter("orderId", orderId);
         return query.getResultList();

@@ -124,7 +124,7 @@ public class OrderItemDaoTest extends AbstractDaoTest {
         assertEquals(2, items.size());
     }
 
-    private OrderItem createTestOrderItem(Integer orderId, Integer productId, int quantity, double sellingPrice) {
+    private OrderItem createTestOrderItem(Integer orderId, Integer productId, Integer quantity, double sellingPrice) {
         OrderItem item = new OrderItem();
         item.setOrderId(orderId);
         item.setProductId(productId);

@@ -1,6 +1,5 @@
 package com.increff.pos.pojo;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,4 +26,5 @@ public class OrderItem extends BaseEntity{
 
     @Column(nullable = false)
     private Integer productId;
+
 }
