@@ -1,13 +1,16 @@
 package com.increff.pos.utils;
 
-import com.increff.pos.commons.exception.ApiException;
+import com.increff.pos.model.data.UploadStatusData;
 
-public abstract class BaseUtil {
-    public static void ifExists(Object pojo,String fieldName)throws ApiException {
-        if(pojo != null)throw new ApiException(fieldName + " already exists!");
-    }
+import java.util.List;
 
-    public static void ifNotExists(Object pojo,String fieldName)throws ApiException{
-        if(pojo == null)throw new ApiException(fieldName + " doesn't exist!");
+public class BaseUtil {
+    public static UploadStatusData convert(Integer totalRows, List<String> errors){
+        UploadStatusData uploadStatusData = new UploadStatusData();
+        uploadStatusData.setTotalCount(totalRows);
+        uploadStatusData.setErrorCount(errors.size());
+        uploadStatusData.setSuccessCount(totalRows - errors.size());
+        uploadStatusData.setErrorMessages(errors);
+        return uploadStatusData;
     }
 }

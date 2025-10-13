@@ -17,20 +17,24 @@ public class ControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse<?> handleFormException(MethodArgumentNotValidException ex) {
+    public Map<String,String> handleFormException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
 
-        return new ApiResponse<>("Validation failed", errors);
+        return errors;
     }
 
     @ExceptionHandler(ApiException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse<String> handleApiException(ApiException e) {
-        return new ApiResponse<>(e.getMessage());
+    public Map<String,String> handleApiException(ApiException e) {
+        Map<String,String> error = new HashMap<>();
+        error.put("message",e.getMessage());
+
+        return error;
     }
 }

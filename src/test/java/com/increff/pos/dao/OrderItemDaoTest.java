@@ -1,8 +1,7 @@
 package com.increff.pos.dao;
 
 import com.increff.pos.model.enums.OrderStatus;
-import com.increff.pos.model.enums.ProductStatus;
-import com.increff.pos.pojo.*;
+import com.increff.pos.entity.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,7 @@ public class OrderItemDaoTest extends AbstractDaoTest {
         p.setClientId(c.getId());
         p.setName("test-product");
         p.setMrp(50.0);
-        p.setCostPrice(25.0);
         p.setCategory("test-cat");
-        p.setStatus(ProductStatus.ACTIVE);
         productDao.insert(p);
         this.testProductId = p.getId();
 

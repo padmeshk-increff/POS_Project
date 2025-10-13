@@ -1,9 +1,8 @@
 package com.increff.pos.dao;
 
-import com.increff.pos.pojo.Client;
-import com.increff.pos.pojo.Inventory;
-import com.increff.pos.pojo.Product;
-import com.increff.pos.model.enums.ProductStatus;
+import com.increff.pos.entity.Client;
+import com.increff.pos.entity.Inventory;
+import com.increff.pos.entity.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,9 +98,7 @@ public class InventoryDaoTest extends AbstractDaoTest {
         p.setClientId(this.testClientId); // Reuses the client created in setup()
         p.setName("test-product");
         p.setMrp(99.99);
-        p.setCostPrice(80.00);
         p.setCategory("test-category");
-        p.setStatus(ProductStatus.ACTIVE);
         productDao.insert(p);
         return p;
     }

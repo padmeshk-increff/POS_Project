@@ -24,7 +24,7 @@ public abstract class  AbstractDao<T> {
     }
 
     @PersistenceContext
-    private EntityManager em;
+    protected EntityManager em;
 
     public void insert(T pojo){
         em.persist(pojo);

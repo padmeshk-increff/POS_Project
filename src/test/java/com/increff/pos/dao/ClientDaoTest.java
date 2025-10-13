@@ -1,6 +1,6 @@
 package com.increff.pos.dao;
 
-import com.increff.pos.pojo.Client;
+import com.increff.pos.entity.Client;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

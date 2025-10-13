@@ -1,4 +1,4 @@
-package com.increff.pos.pojo;
+package com.increff.pos.entity;
 
 import com.increff.pos.model.enums.OrderStatus;
 import lombok.Getter;

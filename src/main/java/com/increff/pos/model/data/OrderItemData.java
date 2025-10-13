@@ -5,9 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClientData{
+public class OrderItemData {
 
     private Integer id;
-    private String clientName;
+    private Integer quantity;
+    private Double sellingPrice;
+    private String productName;
 
 }

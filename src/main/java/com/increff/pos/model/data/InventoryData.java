@@ -5,9 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClientData{
+public class InventoryData{
 
     private Integer id;
-    private String clientName;
+    private Integer productId;
+    private Integer quantity;
 
 }

@@ -1,6 +1,5 @@
-package com.increff.pos.pojo;
+package com.increff.pos.entity;
 
-import com.increff.pos.model.enums.ProductStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,16 +27,9 @@ public class Product extends BaseEntity{
     @Column(nullable = false)
     private Double mrp;
 
-    @Column(nullable = false)
-    private Double costPrice;
-
     private String imageUrl;
 
     @Column( nullable = false)
     private Integer clientId;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ProductStatus status;
 
 }

@@ -1,13 +1,15 @@
-package com.increff.pos.pojo;
+package com.increff.pos.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"orderId","productId"}))
 public class OrderItem extends BaseEntity{
 

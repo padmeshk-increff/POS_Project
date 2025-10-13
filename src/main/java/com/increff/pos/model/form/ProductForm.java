@@ -1,8 +1,8 @@
 package com.increff.pos.model.form;
 
-import com.increff.pos.model.enums.ProductStatus;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
 
@@ -27,17 +27,10 @@ public class ProductForm {
     @Max(value = 100000, message = "MRP seems too high (cannot exceed 1,00,000)")
     private Double mrp;
 
-    @NotNull(message = "Cost Price cannot be null")
-    @Positive(message = "Cost Price must be a positive value")
-    @Max(value = 100000, message = "Cost Price seems too high (cannot exceed 1,00,000)")
-    private Double costPrice;
-
+    @URL(message = "Image url must be a valid url")
     private String imageUrl;
 
     @NotNull(message = "Client ID cannot be null")
     private Integer clientId;
-
-    @NotNull(message = "Status cannot be null")
-    private ProductStatus status;
 
 }

@@ -17,8 +17,6 @@ import java.util.Properties;
 @EnableTransactionManagement // Enables @Transactional annotation
 @PropertySource("classpath:db.properties")
 public class DbConfig {
-
-
     // 1. DataSource Bean: Sets up the connection pool
     @Bean(name = "dataSource")
     public DataSource getDataSource(
@@ -42,7 +40,7 @@ public class DbConfig {
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.increff.pos.pojo"); // Scan for your @Entity classes
+        emf.setPackagesToScan("com.increff.pos.entity"); // Scan for your @Entity classes
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         emf.setJpaProperties(getHibernateProperties());
         return emf;

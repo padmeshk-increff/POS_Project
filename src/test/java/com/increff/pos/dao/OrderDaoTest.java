@@ -1,7 +1,7 @@
 package com.increff.pos.dao;
 
 import com.increff.pos.model.enums.OrderStatus;
-import com.increff.pos.pojo.Order;
+import com.increff.pos.entity.Order;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
